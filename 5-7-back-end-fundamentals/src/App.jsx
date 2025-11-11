@@ -102,14 +102,14 @@ Front-end ALWAYS controls the UI.
 Back-end ONLY supplies the data.
 
 */
-import { useEffect, useState } from 'react';
-import './index.css';
+import { useEffect, useState } from "react";
+import "./index.css";
 
-const API = 'http://localhost:3000/api/students';
+const API = "http://localhost:3000/api/students";
 
 export default function App() {
   const [students, setStudents] = useState([]);
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
 
   // GET: request data from the server
@@ -125,16 +125,16 @@ export default function App() {
   const addStudent = async (e) => {
     e.preventDefault();
     const res = await fetch(API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name })
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name }),
     });
     if (res.ok) {
       const created = await res.json();
       setStudents((prev) => [created, ...prev]);
-      setName('');
+      setName("");
     } else {
-      alert('Failed to add student');
+      alert("Failed to add student");
     }
   };
 
@@ -147,16 +147,16 @@ export default function App() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Student name"
-          style={{ padding: '0.5rem', flex: 1 }}
+          style={{ padding: "0.5rem", flex: 1 }}
         />
-        <button type="submit" >Add</button>
+        <button type="submit">Add</button>
       </form>
 
       {loading && <p>Loading…</p>}
 
       <ul>
         {students.map((s) => (
-          <li key={s.id} >{s.name}</li>
+          <li key={s.id}>{s.name}</li>
         ))}
       </ul>
     </main>
